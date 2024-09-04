@@ -93,7 +93,7 @@ const uniqueItemDisenchantingList = computed(() => {
     increaseByFactors += item.quality
   } else {
     // Checking the catalyst quality
-    const catalystQualityStr = CLIENT_STRINGS.QUALITY.slice(-2) + ' ('
+    const catalystQualityStr = CLIENT_STRINGS.QUALITY.slice(0, -2) + ' ('
     const lines = item.rawText.split(/\r?\n/)
 
     for (const line of lines) {
