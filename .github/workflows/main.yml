@@ -3,7 +3,7 @@ name: Build
 on:
   push:
     branches:
-      - 'master'
+      - 'dev'
     tags-ignore:
       - '**'
     paths-ignore:
@@ -34,7 +34,8 @@ jobs:
     needs: renderer
     strategy:
       matrix:
-        os: [windows-2019, ubuntu-20.04, macos-12]
+        # os: [windows-2019, ubuntu-20.04, macos-12]
+        os: [windows-2019]
     runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v4
@@ -60,3 +61,8 @@ jobs:
     - name: Hash
       if: ${{ startsWith(matrix.os, 'macos') }}
       run: cat ./main/dist/latest-mac.yml
+    - uses: actions/upload-artifact@v4
+      with:
+        name: main-dist-${{ matrix.os }}
+        path: ./main/dist
+        retention-days: 1
